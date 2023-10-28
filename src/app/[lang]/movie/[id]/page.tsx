@@ -4,8 +4,9 @@ import { PageHeader } from "@components/PageHeader";
 import { ToggleThemeButton } from "@components/ToggleThemeButton";
 import { MovieRepository } from "@modules/moviesRepository";
 import { styled } from "@modules/theme";
-import { Box, Card, Container, Flex } from "@radix-ui/themes";
+import { Box, Card, Container, Flex, Text } from "@radix-ui/themes";
 import { DeePlService } from "@modules/deeplService";
+import Link from "next/link";
 
 type MoviePageProps = {
   params: {
@@ -28,7 +29,8 @@ const imageBaseUrl = process.env.MOVIES_API_IMAGE;
 const MoviePage: NextPage<MoviePageProps> = async ({ params }) => {
   const { lang, id } = params;
 
-  const data = await MovieRepository.getMovie(id, lang);
+  const data = await MovieRepository.movieDetails(id, lang);
+
   const [imgWidth, imgHeight] = [400, 600];
   const [imgAlt] = await DeePlService.translate(
     ["Movie poster image"],
@@ -60,7 +62,32 @@ const MoviePage: NextPage<MoviePageProps> = async ({ params }) => {
           </Poster>
         </Card>
 
-        <Box>a</Box>
+        <Flex direction="column" gap="4">
+          <Text size="6" weight="bold">
+            {data.tagline}
+          </Text>
+
+          <Text size="3" weight="bold">
+            {data.genres.map((genre) => genre.name).join(", ")}
+          </Text>
+
+          <Text>
+            {new Date(data.release_date).getFullYear()} {" - "}
+            {data.production_countries.map(({ name }) => name).join(", ")}
+            {" - "} ({data.runtime} min)
+            {" - "} {data.spoken_languages.map(({ name }) => name).join(", ")}
+          </Text>
+
+          <Text size="2">{data.overview}</Text>
+
+          <Link href={data.homepage}>
+            <Text size="2">{data.homepage}</Text>
+          </Link>
+
+          <Text size="2">
+            {data.production_companies.map(({ name }) => name).join(", ")}
+          </Text>
+        </Flex>
       </Flex>
     </Container>
   );

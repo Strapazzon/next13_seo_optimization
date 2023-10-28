@@ -18,7 +18,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
 
   return (
     <Card>
-      <Link href={detailUrl} replace={true}>
+      <Link href={detailUrl}>
         <Flex justify="center" align="center">
           <Image
             src={`${imageBaseUrl}${poster_path}`}
