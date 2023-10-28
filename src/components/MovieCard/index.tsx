@@ -9,7 +9,7 @@ type MovieCardProps = {
   data: Movie;
 };
 
-const [imageWidth, imageHeight] = [200, 300];
+const [imageWidth, imageHeight] = [250, 350];
 const imageBaseUrl = process.env.MOVIES_API_IMAGE;
 
 export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
@@ -17,7 +17,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
   const detailUrl = `/movie/${id}`;
 
   return (
-    <Card>
+    <Card size="2">
       <Link href={detailUrl}>
         <Flex justify="center" align="center">
           <Image
