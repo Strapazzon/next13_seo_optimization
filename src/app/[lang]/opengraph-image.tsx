@@ -2,12 +2,10 @@ import React from "react";
 import { ImageResponse } from "next/og";
 
 import { Montserrat } from "next/font/google";
-import { DeePlService } from "@modules/deeplService";
 
 export const size = { width: 1200, height: 600 };
 export const contentType = "image/png";
 export const runtime = "edge";
-export const revalidate = 0;
 
 const font = Montserrat({ subsets: ["latin"] });
 
@@ -45,9 +43,8 @@ type ImageProps = {
 const Image = async (props: ImageProps) => {
   const { params } = props;
   const { lang } = params;
-  const title = await DeePlService.translate(["In theatres"], lang, "en");
 
-  return new ImageResponse(<ImageElement title={title[0]} />, {
+  return new ImageResponse(<ImageElement title="In theatres" />, {
     emoji: "twemoji",
   });
 };
