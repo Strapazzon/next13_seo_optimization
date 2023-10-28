@@ -4,9 +4,10 @@ import { PageHeader } from "@components/PageHeader";
 import { ToggleThemeButton } from "@components/ToggleThemeButton";
 import { DeePlService } from "@modules/deeplService";
 import { MovieRepository } from "@modules/moviesRepository";
-import { PageSeoProps } from "@modules/seo";
+import { PageSeoProps, SEO } from "@modules/seo";
 import { Container } from "@radix-ui/themes";
 import { NextPage } from "next";
+
 const pageSeo: PageSeoProps = {
   title: "In theatres today",
   description: "All movies in theatres today",
@@ -19,39 +20,25 @@ type HomePageProps = {
   };
 };
 
+export const revalidate = 604800;
+
 export async function generateMetadata(props: HomePageProps) {
   const { params } = props;
   const { lang } = params;
-  console.log("lang", lang);
-
-  const [title, description, keywords] = await DeePlService.translate(
-    [pageSeo.title, pageSeo.description, pageSeo.keywords],
-    lang,
-    "en"
-  );
-
-  return {
-    title,
-    description,
-    keywords,
-    openGraph: {
-      title,
-      description,
-      type: "website",
-    },
-  };
+  return await SEO.buildI18nSeoMetadata(pageSeo, lang);
 }
 
 const HomePage: NextPage<HomePageProps> = async ({ params }) => {
   const { lang } = params;
   const data = await MovieRepository.inTheatresList(1, lang);
-  const title = await DeePlService.translate(["In theatres today"], lang, "en");
+  const [title] = await DeePlService.translate(
+    ["In theatres today"],
+    lang,
+    "en"
+  );
   return (
     <Container size="4">
-      <PageHeader
-        pageTitle={`🎬 ${title[0]}`}
-        rightSlot={<ToggleThemeButton />}
-      />
+      <PageHeader pageTitle={`🎬 ${title}`} rightSlot={<ToggleThemeButton />} />
 
       <MoviesGrid
         data={data.results}
