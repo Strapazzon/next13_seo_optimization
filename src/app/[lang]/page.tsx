@@ -6,22 +6,11 @@ import { DeePlService } from "@modules/deeplService";
 import { MovieRepository } from "@modules/moviesRepository";
 import { PageSeoProps } from "@modules/seo";
 import { Container } from "@radix-ui/themes";
-import { Metadata, NextPage } from "next";
+import { NextPage } from "next";
 const pageSeo: PageSeoProps = {
   title: "In theatres today",
   description: "All movies in theatres today",
   keywords: "films, movies, popular, today, theatres",
-};
-
-export const metadata: Metadata = {
-  title: pageSeo.title,
-  description: pageSeo.description,
-  keywords: pageSeo.keywords,
-  openGraph: {
-    title: pageSeo.title,
-    description: pageSeo.description,
-    type: "website",
-  },
 };
 
 type HomePageProps = {
@@ -29,6 +18,29 @@ type HomePageProps = {
     lang: string;
   };
 };
+
+export async function generateMetadata(props: HomePageProps) {
+  const { params } = props;
+  const { lang } = params;
+  console.log("lang", lang);
+
+  const [title, description, keywords] = await DeePlService.translate(
+    [pageSeo.title, pageSeo.description, pageSeo.keywords],
+    lang,
+    "en"
+  );
+
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+    },
+  };
+}
 
 const HomePage: NextPage<HomePageProps> = async ({ params }) => {
   const { lang } = params;

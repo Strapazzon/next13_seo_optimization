@@ -34,16 +34,7 @@ const ImageElement: React.FC<ImageElementProps> = ({ title }) => (
   </div>
 );
 
-type ImageProps = {
-  params: {
-    lang: string;
-  };
-};
-
-const Image = async (props: ImageProps) => {
-  const { params } = props;
-  const { lang } = params;
-
+const Image = async () => {
   return new ImageResponse(<ImageElement title="In theatres" />, {
     emoji: "twemoji",
   });
