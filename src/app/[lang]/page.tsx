@@ -1,4 +1,3 @@
-import { MovieCard } from "@components/MovieCard";
 import { MoviesGrid } from "@components/MoviesGrid";
 import { PageHeader } from "@components/PageHeader";
 import { ToggleThemeButton } from "@components/ToggleThemeButton";
@@ -39,11 +38,7 @@ const HomePage: NextPage<HomePageProps> = async ({ params }) => {
   return (
     <Container size="4">
       <PageHeader pageTitle={`🎬 ${title}`} rightSlot={<ToggleThemeButton />} />
-
-      <MoviesGrid
-        data={data.results}
-        renderCard={(movie) => <MovieCard data={movie} key={movie.id} />}
-      />
+      <MoviesGrid data={data.results} />
     </Container>
   );
 };

@@ -14,12 +14,13 @@ type MoviePageProps = {
   };
 };
 
-const ImageHolder = styled(Box, {
-  minWidth: "$3500",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
+const Poster = styled(Box, {
   height: "$full",
+  borderRadius: "$m",
+  overflow: "hidden",
+  letterSpacing: "0",
+  wordSpacing: "0",
+  fontSize: "0",
 });
 
 const imageBaseUrl = process.env.MOVIES_API_IMAGE;
@@ -41,7 +42,7 @@ const MoviePage: NextPage<MoviePageProps> = async ({ params }) => {
         direction={{
           initial: "column",
           xs: "column",
-          md: "column",
+          md: "row",
           lg: "row",
           xl: "row",
         }}
@@ -49,15 +50,17 @@ const MoviePage: NextPage<MoviePageProps> = async ({ params }) => {
         id="detail-page"
       >
         <Card>
-          <ImageHolder>
+          <Poster>
             <Image
               src={`${imageBaseUrl}${data.poster_path}`}
               alt={imgAlt}
               width={imgWidth}
               height={imgHeight}
             />
-          </ImageHolder>
+          </Poster>
         </Card>
+
+        <Box>a</Box>
       </Flex>
     </Container>
   );

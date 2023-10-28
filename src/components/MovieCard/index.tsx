@@ -14,11 +14,11 @@ const imageBaseUrl = process.env.MOVIES_API_IMAGE;
 
 export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
   const { id, poster_path, original_title, title, overview } = data;
-  const detailUrl = `/detail/${id}`;
+  const detailUrl = `/movie/${id}`;
 
   return (
-    <Card size="2">
-      <Link href={detailUrl}>
+    <Card>
+      <Link href={detailUrl} replace={true}>
         <Flex justify="center" align="center">
           <Image
             src={`${imageBaseUrl}${poster_path}`}
