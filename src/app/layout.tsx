@@ -4,6 +4,7 @@ import "@styles/global.scss";
 import { NextThemeProvider } from "@modules/theme/themeProvider";
 import { Theme } from "@radix-ui/themes";
 import { radixTheme } from "@modules/theme";
+import { Footer } from "@components/Footer";
 
 type RootLayoutProps = {
   children: React.ReactNode;
@@ -18,7 +19,10 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
     <html suppressHydrationWarning>
       <body>
         <NextThemeProvider>
-          <Theme {...radixTheme}>{children}</Theme>
+          <Theme {...radixTheme}>
+            {children}
+            <Footer />
+          </Theme>
         </NextThemeProvider>
       </body>
     </html>
