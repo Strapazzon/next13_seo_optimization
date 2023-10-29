@@ -36,12 +36,10 @@ export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
           <ShortText size="2">{title}</ShortText>
         </Heading>
       </Link>
-      <ShortText size="2" maxLines={1} mb="2">
+      <ShortText size="2" mb="2">
         {original_title}
       </ShortText>
-      <ShortText size="1" maxLines={2}>
-        {overview}
-      </ShortText>
+      <ShortText size="1">{overview}</ShortText>
     </Card>
   );
 };

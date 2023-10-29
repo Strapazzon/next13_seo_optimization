@@ -132,7 +132,7 @@ export class MovieRepository {
     );
   }
 
-  static async movieImages(id: number) {
+  static async movieImages(id: number | string) {
     return await http<MovieImagesResponse>(`${API_URL}/movie/${id}/images`, {
       headers: {
         Authorization: `Bearer ${API_KEY}`,

@@ -1,12 +1,13 @@
-import { NextPage } from "next";
+import { Metadata, NextPage } from "next";
 import Image from "next/image";
 import { PageHeader } from "@components/PageHeader";
 import { ToggleThemeButton } from "@components/ToggleThemeButton";
 import { MovieRepository } from "@modules/moviesRepository";
-import { styled } from "@modules/theme";
 import { Box, Card, Container, Flex, Text } from "@radix-ui/themes";
 import { DeePlService } from "@modules/deeplService";
 import Link from "next/link";
+import { MovieImagesMosaic } from "@components/MovieImagesMosaic";
+import { styled } from "@modules/theme";
 
 type MoviePageProps = {
   params: {
@@ -16,6 +17,9 @@ type MoviePageProps = {
 };
 
 const Poster = styled(Box, {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
   height: "$full",
   borderRadius: "$m",
   overflow: "hidden",
@@ -87,6 +91,7 @@ const MoviePage: NextPage<MoviePageProps> = async ({ params }) => {
           <Text size="2">
             {data.production_companies.map(({ name }) => name).join(", ")}
           </Text>
+          <MovieImagesMosaic id={id} />
         </Flex>
       </Flex>
     </Container>
@@ -94,5 +99,33 @@ const MoviePage: NextPage<MoviePageProps> = async ({ params }) => {
 };
 
 export const revalidate = 604800;
+
+export async function generateMetadata(
+  props: MoviePageProps
+): Promise<Metadata> {
+  const { params } = props;
+  const { lang, id } = params;
+  const data = await MovieRepository.movieDetails(id, lang);
+  const keywordsRep = await MovieRepository.movieKeywords(id);
+  const originalKeywords = keywordsRep.keywords
+    .map((keyword) => keyword.name)
+    .join(", ");
+
+  const [localeKeywords] = await DeePlService.translate(
+    [originalKeywords],
+    lang,
+    "en"
+  );
+
+  return {
+    title: data.title,
+    description: data.overview,
+    keywords: localeKeywords,
+    openGraph: {
+      title: data.title,
+      description: data.overview,
+    },
+  };
+}
 
 export default MoviePage;

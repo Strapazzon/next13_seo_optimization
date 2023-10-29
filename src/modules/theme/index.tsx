@@ -33,6 +33,6 @@ export const globalStyles = globalCss({});
 
 export const radixTheme: Partial<ThemeOptions> = {
   radius: "small",
-  accentColor: "indigo",
+  accentColor: "cyan",
   panelBackground: "solid",
 };

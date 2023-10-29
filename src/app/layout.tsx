@@ -2,7 +2,8 @@ import React from "react";
 import "@radix-ui/themes/styles.css";
 import { NextThemeProvider } from "@modules/theme/themeProvider";
 import { Theme } from "@radix-ui/themes";
-import { getCssText, radixTheme } from "@modules/theme";
+import { globalStyles, radixTheme } from "@modules/theme";
+import { StitchesRegistry } from "@modules/theme/StitchesRegistry";
 
 type RootLayoutProps = {
   children: React.ReactNode;
@@ -10,14 +11,15 @@ type RootLayoutProps = {
 
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html suppressHydrationWarning>
+      <head>
+        <StitchesRegistry />
+      </head>
       <body>
-        <style
-          id="stitches"
-          dangerouslySetInnerHTML={{ __html: getCssText() }}
-        />
         <NextThemeProvider>
-          <Theme {...radixTheme}>{children}</Theme>
+          <Theme {...radixTheme}>
+            {children} {globalStyles()}
+          </Theme>
         </NextThemeProvider>
       </body>
     </html>
