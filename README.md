@@ -1,6 +1,6 @@
 The NextJS project for demonstrating the functionality of the App router and the dynamic opengraph image feature.
 
-[Live demo](https://next13-seo-optimization.vercel.app/)
+[Live demo](https://next-seo-optimization.vercel.app)
 
 ## Getting Started
 

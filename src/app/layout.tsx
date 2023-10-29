@@ -10,7 +10,7 @@ type RootLayoutProps = {
 };
 
 export const metadata = {
-  metadataBase: process.env.VERCEL_URL ?? "http://localhost:3000",
+  metadataBase: process.env.BASE_URL,
 };
 
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
