@@ -29,13 +29,17 @@ const ImageElement: React.FC<ImageElementProps> = ({ title }) => (
       fontWeight: "bold",
     }}
   >
-    <h1>🎬</h1>
     <h1 className={font.className}>{title}</h1>
   </div>
 );
+type ImageProps = {
+  params: {
+    lang: string;
+  };
+};
 
-const Image = async () => {
-  return new ImageResponse(<ImageElement title="In theatres" />, {
+const Image = async ({}: ImageProps) => {
+  return new ImageResponse(<ImageElement title={`In theatres`} />, {
     emoji: "twemoji",
   });
 };

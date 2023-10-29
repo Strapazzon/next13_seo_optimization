@@ -71,7 +71,7 @@ type MovieKeywordsResponse = {
   }[];
 };
 
-type MovieImageProps = {
+export type MovieImageProps = {
   aspect_ratio: number;
   file_path: string;
   height: number;

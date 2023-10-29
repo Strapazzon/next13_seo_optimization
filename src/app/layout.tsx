@@ -9,6 +9,10 @@ type RootLayoutProps = {
   children: React.ReactNode;
 };
 
+export const metadata = {
+  metadataBase: process.env.VERCEL_URL ?? "http://localhost:3000",
+};
+
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
     <html suppressHydrationWarning>
