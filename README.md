@@ -39,6 +39,7 @@ MOVIES_API_KEY=ekjflksjdkf....
 MOVIES_API_IMAGE=https://image.tmdb.org/t/p/w500
 DEEPL_API_URL=https://api-free.deepl.com/v2
 DEEPL_API_KEY=jkdlajsldkja.....
+BASE_URL=http://localhost:3000
 ```
 
 ## Deploy on Vercel
