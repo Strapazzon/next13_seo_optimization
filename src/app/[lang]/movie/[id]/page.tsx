@@ -7,7 +7,7 @@ import { Box, Card, Container, Flex, Text } from "@radix-ui/themes";
 import { DeePlService } from "@modules/deeplService";
 import Link from "next/link";
 import { MovieImagesMosaic } from "@components/MovieImagesMosaic";
-import { styled } from "@modules/theme";
+import styles from "@styles/movie-page.module.scss";
 
 type MoviePageProps = {
   params: {
@@ -15,18 +15,6 @@ type MoviePageProps = {
     id: number;
   };
 };
-
-const Poster = styled(Box, {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  height: "$full",
-  borderRadius: "$m",
-  overflow: "hidden",
-  letterSpacing: "0",
-  wordSpacing: "0",
-  fontSize: "0",
-});
 
 const imageBaseUrl = process.env.MOVIES_API_IMAGE;
 
@@ -56,14 +44,14 @@ const MoviePage: NextPage<MoviePageProps> = async ({ params }) => {
         id="detail-page"
       >
         <Card>
-          <Poster>
+          <Box className={styles.poster}>
             <Image
               src={`${imageBaseUrl}${data.poster_path}`}
               alt={imgAlt}
               width={imgWidth}
               height={imgHeight}
             />
-          </Poster>
+          </Box>
         </Card>
 
         <Flex direction="column" gap="4">

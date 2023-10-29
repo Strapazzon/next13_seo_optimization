@@ -1,0 +1,17 @@
+.imageHolder {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  &:after {
+    content: "";
+    display: block;
+    padding-top: calc(100% / (16 / 9));
+  }
+}

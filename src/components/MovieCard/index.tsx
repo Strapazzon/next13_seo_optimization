@@ -1,9 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import { Card, Flex, Heading, Separator } from "@radix-ui/themes";
+import { Card, Flex, Heading, Separator, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import { Movie } from "@modules/moviesRepository";
-import { ShortText } from "@components/ShortText";
 
 type MovieCardProps = {
   data: Movie;
@@ -33,13 +32,17 @@ export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
       <Separator my="4" size="4" />
       <Link href={detailUrl}>
         <Heading size="2">
-          <ShortText size="2">{title}</ShortText>
+          <Text className="shortText l2" size="2">
+            {title}
+          </Text>
         </Heading>
       </Link>
-      <ShortText size="2" mb="2">
+      <Text className="shortText l2" size="2" mb="2">
         {original_title}
-      </ShortText>
-      <ShortText size="1">{overview}</ShortText>
+      </Text>
+      <Text className="short-text l1" size="1">
+        {overview}
+      </Text>
     </Card>
   );
 };

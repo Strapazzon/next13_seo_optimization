@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Flex, Heading, Separator } from "@radix-ui/themes";
-import { styled } from "@modules/theme";
+import styles from "@styles/page-header.module.scss";
 
 type PageHeaderProps = {
   boxProps?: React.ComponentProps<typeof Box>;
@@ -10,13 +10,6 @@ type PageHeaderProps = {
   leftSlot?: React.ReactNode;
 };
 
-const Wrapper = styled(Box, {
-  position: "sticky",
-  top: 0,
-  zIndex: 1,
-  backgroundColor: "$background",
-});
-
 export const PageHeader: React.FC<PageHeaderProps> = ({
   boxProps,
   pageTitle,
@@ -25,7 +18,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   rightSlot,
 }) => {
   return (
-    <Wrapper {...boxProps} my="4">
+    <Box className={styles.wrapper} {...boxProps} my="4">
       <Flex direction="row" align="center" justify="between">
         {leftSlot}
         <Heading
@@ -43,6 +36,6 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       </Flex>
       {children}
       <Separator mt="4" mb="6" size="4" />
-    </Wrapper>
+    </Box>
   );
 };

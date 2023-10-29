@@ -1,0 +1,15 @@
+$start: 1;
+$end: 10;
+
+.short-text {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+
+  @for $i from $start through $end {
+    &.l#{$i} {
+      -webkit-line-clamp: $i;
+    }
+  }
+}
