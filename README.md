@@ -1,4 +1,5 @@
-# ⚠️ WIP ⚠️
+The NextJS project for demonstrating the functionality of the App router and the dynamic opengraph image feature.
+
 [Live demo](https://next13-seo-optimization.vercel.app/)
 
 ## Getting Started
@@ -21,17 +22,25 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Technologies and libraries
 
-To learn more about Next.js, take a look at the following resources:
+- [NextJS](https://nextjs.org/)
+- [Radix UI](https://www.radix-ui.com)
+- [Vercel](https://vercel.com)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment variables:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Create a new file named `.env.local` in the project's root directory and add the following variables to it:
+
+```dosini
+# .env.sample, committed to repo
+MOVIES_API=https://api.themoviedb.org/3
+MOVIES_API_KEY=ekjflksjdkf....
+MOVIES_API_IMAGE=https://image.tmdb.org/t/p/w500
+DEEPL_API_URL=https://api-free.deepl.com/v2
+DEEPL_API_KEY=jkdlajsldkja.....
+```
 
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
