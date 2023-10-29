@@ -19,6 +19,12 @@ export class SEO {
       "en"
     );
 
+    let canonicalUrl = `${process.env.BASE_URL}/${lang}`;
+
+    if (pageSeo.uid) {
+      canonicalUrl += `/${pageSeo.uid}`;
+    }
+
     return {
       title,
       description,
@@ -27,6 +33,7 @@ export class SEO {
         title,
         description,
         type: "website",
+        url: canonicalUrl,
       },
     };
   };
