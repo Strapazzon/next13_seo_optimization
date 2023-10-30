@@ -8,7 +8,8 @@ type MovieCardProps = {
   data: Movie;
 };
 
-const [imageWidth, imageHeight] = [250, 350];
+const porterAspectRatio = 0.67;
+const [imageWidth, imageHeight] = [250, 250 / porterAspectRatio];
 const imageBaseUrl = process.env.MOVIES_API_IMAGE;
 
 export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
