@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const defaultLanguage = "en";
-const languageCookiesName = "LANGUAGE";
+const languageCookiesName = process.env.LANGUAGE_COOKIE_NAME;
 
 function getLanguage(request: NextRequest): string {
+  if (!languageCookiesName) {
+    return defaultLanguage;
+  }
+
   const acceptLanguage = request.headers.get("accept-language")?.split(",")[0];
   const cookiesLanguage = request.cookies.get(languageCookiesName);
 
@@ -37,6 +41,10 @@ const injectLanguageCookies = (
   response: NextResponse,
   language: string
 ) => {
+  if (!languageCookiesName) {
+    return response;
+  }
+
   if (request.cookies.get(languageCookiesName)) {
     return response;
   }

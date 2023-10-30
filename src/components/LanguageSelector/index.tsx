@@ -3,7 +3,9 @@
 import React from "react";
 import { Flex, Select } from "@radix-ui/themes";
 import { availableLanguages } from "@modules/common/i18n/languages";
-import { redirect } from "next/navigation";
+import { RedirectType, redirect } from "next/navigation";
+
+const languageCookieName = process.env.LANGUAGE_COOKIE_NAME || "LANGUAGE";
 
 type LanguageSelectorProps = {
   selectedLanguage?: string;
@@ -14,11 +16,11 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
 }) => {
   const handleOnChange = (value: string) => {
     setCookieLanguage(value);
-    redirect("/");
+    redirect("/", RedirectType.replace);
   };
 
   const setCookieLanguage = (value: string) => {
-    document.cookie = `LANGUAGE=${value};path=/`;
+    document.cookie = `${languageCookieName}=${value};path=/`;
   };
 
   return (

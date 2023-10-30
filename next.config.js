@@ -13,6 +13,9 @@ const nextConfig = {
       },
     ],
   },
+  env: {
+    LANGUAGE_COOKIE_NAME: process.env.LANGUAGE_COOKIE_NAME,
+  },
 };
 
 module.exports = nextConfig;
