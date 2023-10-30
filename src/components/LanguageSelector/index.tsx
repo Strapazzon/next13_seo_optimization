@@ -16,7 +16,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
 }) => {
   const handleOnChange = (value: string) => {
     setCookieLanguage(value);
-    redirect("/", RedirectType.replace);
+    redirect(`/${value}`, RedirectType.replace);
   };
 
   const setCookieLanguage = (value: string) => {
