@@ -43,7 +43,7 @@ const HomePage: NextPage<HomePageProps> = async ({ params }) => {
         rightSlot={
           <Flex align="center">
             <ToggleThemeButton />
-            <LanguageSelector value={lang} />
+            <LanguageSelector selectedLanguage={lang} />
           </Flex>
         }
       />

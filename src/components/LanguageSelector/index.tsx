@@ -1,22 +1,20 @@
 "use client";
 
 import React from "react";
-import { Flex, Select, Text } from "@radix-ui/themes";
+import { Flex, Select } from "@radix-ui/themes";
 import { availableLanguages } from "@modules/common/i18n/languages";
+import { redirect } from "next/navigation";
 
 type LanguageSelectorProps = {
-  value?: string;
+  selectedLanguage?: string;
 };
 
 export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
-  value = "en",
+  selectedLanguage = "en",
 }) => {
-  const [selectedLanguage, setSelectedLanguage] = React.useState(value);
-
   const handleOnChange = (value: string) => {
-    setSelectedLanguage(value);
     setCookieLanguage(value);
-    window.location.href = `/`;
+    redirect("/");
   };
 
   const setCookieLanguage = (value: string) => {
