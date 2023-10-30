@@ -27,33 +27,9 @@ export function middleware(request: NextRequest) {
 
   request.nextUrl.pathname = `/${lang}${pathname}`;
 
-  const response = NextResponse.redirect(request.nextUrl);
-
-  return injectLanguageCookies(request, response, lang);
+  return NextResponse.redirect(request.nextUrl);
 }
 
 export const config = {
   matcher: ["/", "/movie/:path*"],
-};
-
-const injectLanguageCookies = (
-  request: NextRequest,
-  response: NextResponse,
-  language: string
-) => {
-  if (!languageCookiesName) {
-    return response;
-  }
-
-  if (request.cookies.get(languageCookiesName)) {
-    return response;
-  }
-
-  response.cookies.set({
-    name: languageCookiesName,
-    value: language,
-    path: "/",
-  });
-
-  return response;
 };

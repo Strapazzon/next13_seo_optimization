@@ -26,6 +26,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
             alt={`${title} poster`}
             height={imageHeight}
             width={imageWidth}
+            quality={80}
           />
         </Flex>
       </Link>
