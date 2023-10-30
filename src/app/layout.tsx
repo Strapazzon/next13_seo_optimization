@@ -8,15 +8,20 @@ import { Footer } from "@components/Footer";
 
 type RootLayoutProps = {
   children: React.ReactNode;
+  params: {
+    lang?: string;
+  };
 };
 
 export const metadata = {
   metadataBase: process.env.BASE_URL,
 };
 
-const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
+const RootLayout: React.FC<RootLayoutProps> = ({ children, params }) => {
+  const { lang = "en" } = params;
+
   return (
-    <html suppressHydrationWarning>
+    <html suppressHydrationWarning lang={lang}>
       <body>
         <NextThemeProvider>
           <Theme {...radixTheme}>

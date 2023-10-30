@@ -12,8 +12,6 @@ function getLanguage(request: NextRequest) {
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  console.log("middleware");
-  console.log(pathname);
   const lang = getLanguage(request);
 
   request.nextUrl.pathname = `/${lang}${pathname}`;
