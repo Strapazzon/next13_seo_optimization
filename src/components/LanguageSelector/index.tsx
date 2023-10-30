@@ -16,7 +16,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   const handleOnChange = (value: string) => {
     setSelectedLanguage(value);
     setCookieLanguage(value);
-    window.location.href = `/${value}`;
+    window.location.href = `/`;
   };
 
   const setCookieLanguage = (value: string) => {
