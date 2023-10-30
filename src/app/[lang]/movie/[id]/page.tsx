@@ -8,6 +8,7 @@ import { DeePlService } from "@modules/deeplService";
 import Link from "next/link";
 import { MovieImagesMosaic } from "@components/MovieImagesMosaic";
 import styles from "@styles/movie-page.module.scss";
+import { LanguageSelector } from "@components/LanguageSelector";
 
 type MoviePageProps = {
   params: {
@@ -31,7 +32,14 @@ const MoviePage: NextPage<MoviePageProps> = async ({ params }) => {
   );
   return (
     <Container size="4">
-      <PageHeader pageTitle={data.title} rightSlot={<ToggleThemeButton />} />
+      <PageHeader
+        pageTitle={data.title}
+        rightSlot={
+          <Flex align="center">
+            <ToggleThemeButton />
+          </Flex>
+        }
+      />
       <Flex
         direction={{
           initial: "column",

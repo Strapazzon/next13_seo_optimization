@@ -1,11 +1,18 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const defaultLanguage = "en";
+const languageCookiesName = "LANGUAGE";
 
-function getLanguage(request: NextRequest) {
-  const language = request.headers.get("accept-language")?.split(",")[0];
-  if (language) {
-    return language.split("-")[0];
+function getLanguage(request: NextRequest): string {
+  const acceptLanguage = request.headers.get("accept-language")?.split(",")[0];
+  const cookiesLanguage = request.cookies.get(languageCookiesName);
+
+  if (cookiesLanguage) {
+    return cookiesLanguage.value;
+  }
+
+  if (acceptLanguage) {
+    return acceptLanguage.split("-")[0];
   }
   return defaultLanguage;
 }
@@ -16,9 +23,29 @@ export function middleware(request: NextRequest) {
 
   request.nextUrl.pathname = `/${lang}${pathname}`;
 
-  return Response.redirect(request.nextUrl);
+  const response = NextResponse.redirect(request.nextUrl);
+
+  return injectLanguageCookies(request, response, lang);
 }
 
 export const config = {
   matcher: ["/", "/movie/:path*"],
+};
+
+const injectLanguageCookies = (
+  request: NextRequest,
+  response: NextResponse,
+  language: string
+) => {
+  if (request.cookies.get(languageCookiesName)) {
+    return response;
+  }
+
+  response.cookies.set({
+    name: languageCookiesName,
+    value: language,
+    path: "/",
+  });
+
+  return response;
 };

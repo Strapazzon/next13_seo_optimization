@@ -1,10 +1,11 @@
+import { LanguageSelector } from "@components/LanguageSelector";
 import { MoviesGrid } from "@components/MoviesGrid";
 import { PageHeader } from "@components/PageHeader";
 import { ToggleThemeButton } from "@components/ToggleThemeButton";
 import { DeePlService } from "@modules/deeplService";
 import { MovieRepository } from "@modules/moviesRepository";
 import { PageSeoProps, SEO } from "@modules/seo";
-import { Container } from "@radix-ui/themes";
+import { Container, Flex } from "@radix-ui/themes";
 import { NextPage } from "next";
 
 const pageSeo: PageSeoProps = {
@@ -37,7 +38,15 @@ const HomePage: NextPage<HomePageProps> = async ({ params }) => {
   );
   return (
     <Container size="4">
-      <PageHeader pageTitle={`🎬 ${title}`} rightSlot={<ToggleThemeButton />} />
+      <PageHeader
+        pageTitle={`🎬 ${title}`}
+        rightSlot={
+          <Flex align="center">
+            <ToggleThemeButton />
+            <LanguageSelector value={lang} />
+          </Flex>
+        }
+      />
       <MoviesGrid data={data.results} />
     </Container>
   );
